@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+  </head>
+  <body>
+    <section class="todo-container">
+      <ul class="todo-list" id="list">
+        <li class="heading">
+          <h3>Today's To Do</h3>
+          <img
+            src="https://img.icons8.com/ios-glyphs/30/000000/refresh--v1.png"
+            alt="refresh-icon"
+            class="refresh-icon"
+          />
+        </li>
+        <li>
+          <form class="form">
+            <label for="todo-input">
+              <input
+                type="text"
+                id="todo-input"
+                placeholder="Add to your list..."
+              />
+            </label>
+          </form>
+        </li>
+      </ul>
+      <article class="footer">
+        <a href="#">Clear all completed</a>
+      </article>
+    </section>
+
+    <template id="list-item-template">
+      <li class="list-item">
+        <label class="list-item-label">
+          <input type="checkbox" data-list-item-checkbox />
+          <span data-list-item-text></span>
+        </label>
+        <img
+          src="https://img.icons8.com/ios/50/000000/menu-2.png"
+          alt="vertical-menu-icon"
+          class="vertical-menu-icon"
+        />
+      </li>
+    </template>
+  </body>
+</html>
