@@ -28,6 +28,10 @@ module.exports = {
         type: 'asset/resource',
       },
       {
+        test: /\.svg/,
+        type: 'asset/inline',
+      },
+      {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
       },
