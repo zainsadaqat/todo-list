@@ -23,13 +23,11 @@ const todo_list = [
   },
 ];
 
-// access html elements
 const todoListContainer = document.querySelector('#list');
 const form = document.querySelector('.form');
 const inputField = document.querySelector('#todo-input');
 const template = document.querySelector('#list-item-template');
 
-// Access template elements
 todo_list.forEach((todo) => {
   const templateClone = template.content.cloneNode(true);
   const listItem = templateClone.querySelector('.list-item');
