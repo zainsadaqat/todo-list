@@ -1,6 +1,6 @@
 import './style.css';
 
-const todo_list = [
+const todoList = [
   {
     description: 'Finish JS Activities',
     completed: true,
@@ -24,13 +24,10 @@ const todo_list = [
 ];
 
 const todoListContainer = document.querySelector('#list');
-const form = document.querySelector('.form');
-const inputField = document.querySelector('#todo-input');
 const template = document.querySelector('#list-item-template');
 
-todo_list.forEach((todo) => {
+todoList.forEach((todo) => {
   const templateClone = template.content.cloneNode(true);
-  const listItem = templateClone.querySelector('.list-item');
   const taskContent = templateClone.querySelector('[data-list-item-text]');
   taskContent.innerText = todo.description;
   const checkBox = templateClone.querySelector('[data-list-item-checkbox]');
