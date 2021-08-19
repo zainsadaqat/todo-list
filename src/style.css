@@ -12,14 +12,28 @@ body {
   padding: 1em;
 }
 
+.line-through {
+  text-decoration: line-through;
+}
+
 .todo-container {
   max-width: 400px;
   margin: 2em auto;
   box-shadow: 0 4px 6px #ccc;
+  border-radius: 10px;
   background-color: #fff;
 }
 
+.todo-list {
+  max-height: 64vh;
+  overflow-y: auto;
+}
+
 .heading {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,7 +73,7 @@ body {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #eee;
-  padding: 0.75em 0.5em;
+  padding: 0.25em 0.5em;
 }
 
 .list-item:hover {
@@ -79,7 +93,7 @@ body {
 .footer {
   text-align: center;
   padding: 1.25em;
-  background-color: #f1f1f1;
+  background-color: #fafafa;
 }
 
 .footer > * {
