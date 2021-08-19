@@ -1,11 +1,11 @@
-import Todo from './todo';
-import { checkBoxEvent } from './checkbox';
+import Todo from './todo.js';
+import checkBoxEvent from './checkbox.js';
 import './style.css';
 
 const TODO_LIST_KEY = 'TODO_LIST_KEY';
 
 const loadList = () => {
-  let dataInStringFormat = localStorage.getItem(TODO_LIST_KEY);
+  const dataInStringFormat = localStorage.getItem(TODO_LIST_KEY);
   return JSON.parse(dataInStringFormat) || [];
 };
 
@@ -24,6 +24,8 @@ const clearField = () => {
 };
 
 form.addEventListener('submit', () => {
+  if (inputField.value === '') return;
+
   // Access Template Elements
   const template = document.querySelector('#list-item-template');
   const templateClone = template.content.cloneNode(true);
@@ -35,9 +37,14 @@ form.addEventListener('submit', () => {
   todoList.push(todoTemplate);
   saveList();
   taskContent.innerText = inputField.value;
-  checkBox.checked = checkBox.checked ? true : false;
+  if (checkBox.checked) {
+    taskContent.classList.add('.line-through');
+    checkBox.checked = true;
+  } else {
+    taskContent.classList.remove('.line-through');
+    checkBox.checked = false;
+  }
   todoListContainer.appendChild(templateClone);
-  console.log(todoList);
   clearField();
 });
 
@@ -46,7 +53,7 @@ todoList.forEach((todo) => {
   const templateClone = template.content.cloneNode(true);
   const taskContent = templateClone.querySelector('[data-list-item-text]');
   const checkBox = templateClone.querySelector('[data-list-item-checkbox]');
-  checkBox.addEventListener('change', (e) => {
+  checkBox.addEventListener('change', () => {
     // Save checkbox event in local storage
     checkBoxEvent(todo, checkBox, taskContent, saveList);
   });
