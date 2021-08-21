@@ -25,14 +25,15 @@ const renderTodo = (todo) => {
   checkBox.checked = todo.completed;
   checkBox.addEventListener('change', () => {
     todo.completed = checkBox.checked;
-    saveList();
+    // saveList();
+    localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   });
   const listItem = templateClone.querySelector('.list-item');
   listItem.dataset.todoIndex = todo.index;
   todoListContainer.appendChild(templateClone);
 };
 
-export let todoList = loadList();
+let todoList = loadList();
 todoList.forEach((todo) => renderTodo(todo));
 
 const clearField = () => {
@@ -43,9 +44,10 @@ form.addEventListener('submit', () => {
   if (inputField.value === '') return;
 
   const todoTemplate = new Todo(todoList.length, inputField.value, false);
-  todoList.push(todoTemplate); // new todo gets added to the list
-  renderTodo(todoTemplate); //Here it adds that new todo to the list
-  saveList();
+  todoList.push(todoTemplate);
+  renderTodo(todoTemplate);
+  // saveList();
+  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   clearField();
 });
 
@@ -56,14 +58,23 @@ todoListContainer.addEventListener('click', (e) => {
   const todoIndex = parseInt(parent.dataset.todoIndex);
   parent.remove(); // removes from the screen
   todoList = todoList.filter((todo) => todo.index !== todoIndex); // removes from the list
-  saveList(); // saves updated list
+  // saveList(); saves updated list
+  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
 });
 
-clearAllCompleted.addEventListener('click', (e) => {
+clearAllCompleted.addEventListener('click', () => {
   todoList = todoList.filter((todo) => todo.completed === false);
-  saveList();
+  // saveList();
+  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   location.reload();
 });
+
+const index = () => {
+  let length = todoList.length;
+  for (let i = 0; i < length; i++) {
+    todo[i].index = i;
+  }
+};
 
 todoListContainer.addEventListener('click', (e) => {
   if (!e.target.matches('[data-button-edit]')) return;
@@ -71,10 +82,14 @@ todoListContainer.addEventListener('click', (e) => {
   const parent = e.target.closest('.list-item');
   const todoId = parent.dataset.todoIndex;
   const todoIndex = parent.querySelector('[data-list-item-text]');
-  let editedTodo = prompt('Please edit your todo', '');
+  console.log('index: ', todoIndex);
+  console.log('ID: ', todoId);
+  const editedTodo = prompt('Please edit your todo', '');
   if (editedTodo != null) {
     todoList[todoId].description = editedTodo;
   }
-  saveList();
+  // index();
+  // saveList();
+  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   location.reload();
 });
