@@ -25,7 +25,6 @@ const renderTodo = (todo) => {
   checkBox.checked = todo.completed;
   checkBox.addEventListener('change', () => {
     todo.completed = checkBox.checked;
-    // saveList();
     localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   });
   const listItem = templateClone.querySelector('.list-item');
@@ -46,7 +45,6 @@ form.addEventListener('submit', () => {
   const todoTemplate = new Todo(todoList.length, inputField.value, false);
   todoList.push(todoTemplate);
   renderTodo(todoTemplate);
-  // saveList();
   localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   clearField();
 });
@@ -58,7 +56,6 @@ todoListContainer.addEventListener('click', (e) => {
   const todoIndex = parseInt(parent.dataset.todoIndex);
   parent.remove(); // removes from the screen
   todoList = todoList.filter((todo) => todo.index !== todoIndex); // removes from the list
-  // saveList(); saves updated list
   localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
 });
 
@@ -79,8 +76,6 @@ todoListContainer.addEventListener('click', (e) => {
   if (editedTodo != null) {
     todoList[todoId].description = editedTodo;
   }
-  // index();
-  // saveList();
   localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   location.reload();
 });
