@@ -30,7 +30,7 @@
         </li>
       </ul>
       <article class="footer">
-        <a href="#">Clear all completed</a>
+        <a href="#" class="clear-all-completed">Clear all completed</a>
       </article>
     </section>
 
@@ -40,11 +40,21 @@
           <input type="checkbox" data-list-item-checkbox />
           <span data-list-item-text></span>
         </label>
-        <img
-          src="https://img.icons8.com/ios/50/000000/menu-2.png"
-          alt="vertical-menu-icon"
-          class="vertical-menu-icon"
-        />
+        <article>
+          <img
+            data-button-delete
+            src="https://img.icons8.com/ios-glyphs/30/000000/trash--v1.png"
+            alt="delete-icon"
+            class="delete-icon"
+          />
+          <img
+            data-button-edit
+            src="https://img.icons8.com/material-outlined/24/000000/edit--v1.png"
+            alt="edit-icon"
+            class="edit-icon"
+            href="#todo-input"
+          />
+        </article>
       </li>
     </template>
   </body>

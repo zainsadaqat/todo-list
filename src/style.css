@@ -12,10 +12,6 @@ body {
   padding: 1em;
 }
 
-.line-through {
-  text-decoration: line-through;
-}
-
 .todo-container {
   max-width: 400px;
   margin: 2em auto;
@@ -45,12 +41,21 @@ body {
 }
 
 .refresh-icon,
-.vertical-menu-icon {
+.delete-icon,
+.edit-icon {
   width: 18px;
   height: 18px;
+  opacity: 0.3;
+}
+
+.refresh-icon:hover,
+.delete-icon:hover,
+.edit-icon:hover {
+  cursor: pointer;
 }
 
 #todo-input {
+  background-color: rgb(238, 238, 238);
   border: none;
   outline: none;
   border-bottom: 1px solid #eee;
@@ -78,6 +83,15 @@ body {
 
 .list-item:hover {
   background-color: #f1f1f1;
+}
+
+.list-item-label:hover > [data-list-item-text] {
+  text-decoration: line-through;
+}
+
+[data-list-item-checkbox]:checked ~ [data-list-item-text] {
+  text-decoration: line-through;
+  color: #aaa;
 }
 
 .list-item-label {
