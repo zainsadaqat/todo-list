@@ -49,6 +49,13 @@ form.addEventListener('submit', () => {
   clearField();
 });
 
+const setIndex = () => {
+  let length = todoList.length;
+  for (let i = 0; i < length; i += 1) {
+    todoList[i].index = i + 1;
+  }
+};
+
 todoListContainer.addEventListener('click', (e) => {
   if (!e.target.matches('[data-button-delete]')) return;
 
@@ -61,7 +68,7 @@ todoListContainer.addEventListener('click', (e) => {
 
 clearAllCompleted.addEventListener('click', () => {
   todoList = todoList.filter((todo) => todo.completed === false);
-  // saveList();
+  setIndex();
   localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   location.reload();
 });
