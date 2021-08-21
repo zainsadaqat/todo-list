@@ -29,7 +29,7 @@ const renderTodo = (todo) => {
     localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   });
   const listItem = templateClone.querySelector('.list-item');
-  listItem.dataset.todoIndex = todo.index;
+  listItem.dataset.todoIndex = todo.index + 1;
   todoListContainer.appendChild(templateClone);
 };
 
@@ -69,21 +69,12 @@ clearAllCompleted.addEventListener('click', () => {
   location.reload();
 });
 
-const index = () => {
-  let length = todoList.length;
-  for (let i = 0; i < length; i++) {
-    todo[i].index = i;
-  }
-};
-
 todoListContainer.addEventListener('click', (e) => {
   if (!e.target.matches('[data-button-edit]')) return;
 
   const parent = e.target.closest('.list-item');
   const todoId = parent.dataset.todoIndex;
   const todoIndex = parent.querySelector('[data-list-item-text]');
-  console.log('index: ', todoIndex);
-  console.log('ID: ', todoId);
   const editedTodo = prompt('Please edit your todo', '');
   if (editedTodo != null) {
     todoList[todoId].description = editedTodo;
