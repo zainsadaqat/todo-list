@@ -32,17 +32,16 @@ const renderTodo = (todo) => {
   todoListContainer.appendChild(templateClone);
 };
 
-let todoList = loadList();
+export let todoList = loadList();
 todoList.forEach((todo) => renderTodo(todo));
 
 const clearField = () => {
   inputField.value = '';
 };
 
-// When user submits a todo
 form.addEventListener('submit', () => {
   if (inputField.value === '') return;
-  // Create a new Todo
+
   const todoTemplate = new Todo(todoList.length, inputField.value, false);
   todoList.push(todoTemplate); // new todo gets added to the list
   renderTodo(todoTemplate); //Here it adds that new todo to the list
@@ -50,11 +49,9 @@ form.addEventListener('submit', () => {
   clearField();
 });
 
-// Delete a todo
 todoListContainer.addEventListener('click', (e) => {
   if (!e.target.matches('[data-button-delete]')) return;
 
-  // Get the todo that is clicked on
   const parent = e.target.closest('.list-item');
   const todoIndex = parseInt(parent.dataset.todoIndex);
   parent.remove(); // removes from the screen
@@ -62,9 +59,22 @@ todoListContainer.addEventListener('click', (e) => {
   saveList(); // saves updated list
 });
 
-// Clear all selected todos
 clearAllCompleted.addEventListener('click', (e) => {
   todoList = todoList.filter((todo) => todo.completed === false);
+  saveList();
+  location.reload();
+});
+
+todoListContainer.addEventListener('click', (e) => {
+  if (!e.target.matches('[data-button-edit]')) return;
+
+  const parent = e.target.closest('.list-item');
+  const todoId = parent.dataset.todoIndex;
+  const todoIndex = parent.querySelector('[data-list-item-text]');
+  let editedTodo = prompt('Please edit your todo', '');
+  if (editedTodo != null) {
+    todoList[todoId].description = editedTodo;
+  }
   saveList();
   location.reload();
 });
