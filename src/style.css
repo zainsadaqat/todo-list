@@ -85,6 +85,12 @@ body {
   background-color: #f1f1f1;
 }
 
+[data-list-item-text] {
+  margin-left: 0.35em;
+  color: #777;
+  font-size: 0.85rem;
+}
+
 .list-item-label:hover > [data-list-item-text] {
   text-decoration: line-through;
 }
@@ -96,12 +102,6 @@ body {
 
 .list-item-label {
   padding: 0.75em;
-}
-
-[data-list-item-text] {
-  margin-left: 0.35em;
-  color: #777;
-  font-size: 0.85rem;
 }
 
 .footer {
