@@ -12,6 +12,9 @@ I'll be implementing the following functionalities:
 
 ![screenshot](./app_screenshot.png)
 
+# Project Live Link
+https://zainsadaqat.github.io/todo-list/
+
 ## Built With
 
 - HTML, CSS and JS
