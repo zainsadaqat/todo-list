@@ -13,10 +13,6 @@ const loadList = () => {
   return JSON.parse(dataInStringFormat) || [];
 };
 
-const saveList = () => {
-  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
-};
-
 const renderTodo = (todo) => {
   const templateClone = template.content.cloneNode(true);
   const taskContent = templateClone.querySelector('[data-list-item-text]');
@@ -28,7 +24,7 @@ const renderTodo = (todo) => {
     localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   });
   const listItem = templateClone.querySelector('.list-item');
-  listItem.dataset.todoIndex = todo.index + 1;
+  listItem.dataset.todoIndex = todo.index;
   todoListContainer.appendChild(templateClone);
 };
 
@@ -39,22 +35,23 @@ const clearField = () => {
   inputField.value = '';
 };
 
-form.addEventListener('submit', () => {
-  if (inputField.value === '') return;
-
-  const todoTemplate = new Todo(todoList.length, inputField.value, false);
-  todoList.push(todoTemplate);
-  renderTodo(todoTemplate);
-  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
-  clearField();
-});
-
 const setIndex = () => {
   let length = todoList.length;
   for (let i = 0; i < length; i += 1) {
     todoList[i].index = i + 1;
   }
 };
+
+form.addEventListener('submit', () => {
+  if (inputField.value === '') return;
+
+  const todoTemplate = new Todo(todoList.length, inputField.value, false);
+  todoList.push(todoTemplate);
+  setIndex();
+  renderTodo(todoTemplate);
+  localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
+  clearField();
+});
 
 todoListContainer.addEventListener('click', (e) => {
   if (!e.target.matches('[data-button-delete]')) return;
@@ -63,6 +60,7 @@ todoListContainer.addEventListener('click', (e) => {
   const todoIndex = parseInt(parent.dataset.todoIndex);
   parent.remove(); // removes from the screen
   todoList = todoList.filter((todo) => todo.index !== todoIndex); // removes from the list
+  setIndex();
   localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
 });
 
@@ -80,8 +78,8 @@ todoListContainer.addEventListener('click', (e) => {
   const todoId = parent.dataset.todoIndex;
   const todoIndex = parent.querySelector('[data-list-item-text]');
   const editedTodo = prompt('Please edit your todo', '');
-  if (editedTodo != null) {
-    todoList[todoId].description = editedTodo;
+  if (editedTodo !== null) {
+    todoList[todoIndex].description = editedTodo;
   }
   localStorage.setItem(TODO_LIST_KEY, JSON.stringify(todoList));
   location.reload();
